@@ -55,9 +55,15 @@ body{
 }
 #table-records{
     width: 100%;
-    border: 1px red;
 }
-
+table, td, th {
+    padding: 0.5rem;
+    border-top: 0.05rem solid red;
+    border-right: 0.05rem solid red;
+}
+table {
+    border-collapse: collapse;
+}
 
 /*LARGE SCREAM*/
 

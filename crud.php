@@ -20,12 +20,14 @@ class Crud
 
 	
 
-	public function create($name, $email)
+	public function create($name,$telefono, $email="")
 	{
         try {
-			$sentenciaSql = "INSERT INTO person(per_name, per_email, per_date_create, per_date_update, 'status') VALUES (?, ?, ?, ?, ?, ?)";
+			$sentenciaSql = "INSERT INTO person(per_name, per_telefono, per_email, per_date_create, per_date_update) 
+								VALUES (?, ?, ?, CURDATE(), CURDATE())";
 			$resultado = $this->miConexion->prepare($sentenciaSql);
-            $datosIns = array($name,$email,"2021-12-09", "2021-12-09", 1);
+            //$datosIns = array("Sneider", '358', "sneider@outlook.com");
+            $datosIns = array($name, $telefono, $email);
             $resultado->execute($datosIns);
 			$this->retorno->estado = true;
         	$this->retorno->datos = $resultado;
@@ -40,7 +42,7 @@ class Crud
 	public function read()
 	{
 		try {
-			$sentenciaSql ="SELECT * FROM person WHERE status = 1";
+			$sentenciaSql ="SELECT * FROM person";
 			$resultado = $this->miConexion->query($sentenciaSql);
 			$retorno = $resultado->fetchAll(PDO::FETCH_ASSOC);
 			$this->retorno->estado =true;
@@ -90,4 +92,10 @@ class Crud
 /* foreach($ejemplo as $fila) {
 	print_r($fila);
 }*/
+// CREATE
+/*
+$crud = new Crud();
+$res = $crud->create('Yenner', '666', 'insertando@tela.rico');
+var_dump($res);
+*/
 ?>

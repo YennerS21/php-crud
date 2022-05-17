@@ -22,21 +22,21 @@
                     <span>Form register</span>
                     <p>
                         <label for="">Name</label>
-                        <input type="text" name="txtName" id="txtName">
+                        <input type="text" name="txtName" id="txtName" placeholder="Ej: Carlos">
+                    </p>
+                    <p>
+                        <label for="">Phone</label>
+                        <input type="number" name="txtPhone" id="txtPhone" placeholder="Ej: 123">
                     </p>
                     <p>
                         <label for="">Email</label>
-                        <input type="email" name="txtEmail" id="txtEmail">
-                    </p>
-                    <p hidden>
-                        <label for="">Status</label>
-                        <input type="number" name="numStatus" id="numStatus">
+                        <input type="email" name="txtEmail" id="txtEmail" placeholder="Ej: carlos@ejemplo.com">
                     </p>
                     <p>
-                    <button type="button" id="btnCreate">Create</button>
-                    <button type="button" id="btnEdit" >Edit</button>
-                    <button type="button" id="btnDelete" >Delete</button>
-                    <button type="reset" id="btnCancel" >Cancel</button>
+                        <button type="button" id="btnCreate">Create</button>
+                        <button type="button" id="btnEdit" >Edit</button>
+                        <button type="button" id="btnDelete" >Delete</button>
+                        <button type="reset" id="btnCancel" >Cancel</button>
                     </p>
                 </form>
             </div>
@@ -45,8 +45,9 @@
                 <h1>Table records</h1>
                 <table id="table-records">
                     <tr>
-                        <th>N°</th>
-                        <th>Nombre</th>
+                        <th>id</th>
+                        <th>Name</th>
+                        <th>Number</th>
                         <th>Email</th>
                     </tr>
                     <tbody id="people">
@@ -56,8 +57,8 @@
             </div>
         </div>
     </div>
+    <script src="controlador/controlador.crud.js"></script>
 </body>
-<script src="controlador/controlador.crud.js"></script>
 
 </html>
 

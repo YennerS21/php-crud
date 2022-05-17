@@ -5,9 +5,9 @@ class Conexion extends PDO{
     private  $instancia;
     private $driverPdo = "mysql";
     private $host="localhost";
-    private $userName="myuser";
-    private $password="1234";
-    private $dataBase = "miweb";
+    private $userName="root";
+    private $password="3213049684";
+    private $dataBase = "BDagenda";
     
     /**
      * Método constructor de la Conexión

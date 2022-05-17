@@ -5,12 +5,18 @@ const open = document.addEventListener('DOMContentLoaded', ()=>{
     var btnEdit =document.getElementById('btnEdit');
     var btnDelete =document.getElementById('btnDelete');
     var btnCancel =document.getElementById('btnCancel');
+
     btnCreate.hidden=false;
     btnEdit.hidden=true;
     btnDelete.hidden=true;
     btnCancel.hidden=false;
     
     //Mostrar personas registradas
+    read();
+    
+});
+
+function read(){
     fetch('controlador/controlador.read.php')
     .then((resp)=>resp.json())
     .then((data)=>{
@@ -19,10 +25,11 @@ const open = document.addEventListener('DOMContentLoaded', ()=>{
             let tabla ='';
             for(i in data){
                 tabla += '<tr>';
-                tabla +=    '<td>'+data[i].id_per+'</td>';
+                tabla +=    '<td>'+data[i].id+'</td>';
                 tabla +=    '<td>'+data[i].per_name+'</td>';
+                tabla +=    '<td>'+data[i].per_telefono+'</td>';
                 tabla +=    '<td>'+data[i].per_email+'</td>';
-                tabla +=    '<td><button class="btnEdit" data-id="'+data[i].id_per+'">EDIT</button></td>';
+                tabla +=    '<td><button class="btnEdit" data-id="'+data[i].id+'">EDIT</button></td>';
                 tabla +=    '<td><button class="btnDelete">DELETE</button></td>';
                 tabla += '</tr>';
             }
@@ -35,9 +42,7 @@ const open = document.addEventListener('DOMContentLoaded', ()=>{
         console.log(error);
     })
     .catch((err)=>{console.log(err)})
-});
-
-
+}
 //FUNCIONALIDAD PARA EDITAR REGISTRO
 
 //Funcion que imita el evento onclick
@@ -107,16 +112,14 @@ create.addEventListener('click', insert);
 function insert() {
     var formulario = document.getElementById('frmDatos');
     var datos = new FormData(formulario);
-    console.log(datos);
 
-    fetch("controlador/controlador.create.php",
-    {
+    fetch('controlador/controlador.create.php',{
         method: 'POST',
         body: datos
     })
-    .then(data=>{
-    })
-    .catch(error=>console.log("error: ",error))
+    .then(response => response.text())
+    .then(data => read());
+
 }
 
 //FUNCIONALIDAD PARA ELIMINAR REGISTRO (CAMBIAR EL ESTADO DE TRUE A FALSE)
