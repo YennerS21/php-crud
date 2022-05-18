@@ -48,10 +48,10 @@
                 <h1>Table records</h1>
                 <table id="table-records">
                     <tr>
-                        <th>id</th>
-                        <th>Name</th>
-                        <th>Number</th>
-                        <th>Email</th>
+                        <th hidden>id</th>
+                        <th>NAME</th>
+                        <th>PHONE</th>
+                        <th>EMAIL</th>
                         <th colspan="2">options</th>
                     </tr>
                     <tbody id="people">

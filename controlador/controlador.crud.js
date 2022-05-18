@@ -22,7 +22,7 @@ fetch('controlador/controlador.read.php')
             let tabla ='';
             for(i in data){
                 tabla += '<tr>';
-                tabla +=    '<td>'+data[i].id+'</td>';
+                tabla +=    '<td hidden>'+data[i].id+'</td>';
                 tabla +=    '<td>'+data[i].per_name+'</td>';
                 tabla +=    '<td>'+data[i].per_telefono+'</td>';
                 tabla +=    '<td>'+data[i].per_email+'</td>';
