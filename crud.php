@@ -55,12 +55,12 @@ class Crud
 		}
 		return $this->retorno;
 	}
-	public function update($id,$name,$email)
+	public function update($id,$name, $phone,$email)
 	{
 		try {
-			$sentenciaSql = "UPDATE person SET id_per=?, per_name=?, per_email=?, per_date_update=?, status=? WHERE id_per=$id";
+			$sentenciaSql = "UPDATE person SET  per_name=?, per_telefono=?, per_email=?, per_date_update=CURDATE() WHERE id=$id";
 			$resultado = $this->miConexion->prepare($sentenciaSql);
-			$datoUp = array($id,$name,$email,"2021-04-07", 1);
+			$datoUp = array($name, $phone,$email);
 			$resultado->execute($datoUp);
 			$this->retorno->estado = true;
 	        $this->retorno->datos = $resultado;
@@ -74,10 +74,9 @@ class Crud
 	public function delete($id)
 	{
 		try {
-			$sentenciaSql = "UPDATE person SET status=? WHERE id_per=$id";
+			$sentenciaSql = "DELETE FROM person  WHERE id=$id";
 			$resultado = $this->miConexion->prepare($sentenciaSql);
-			$datoDel = array(0);
-			$resultado->execute($datoDel);
+			$resultado->execute();
 			$this->retorno->estado = true;
 	        $this->retorno->datos = $resultado;
 		} catch (PDOException $e) {

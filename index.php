@@ -20,6 +20,9 @@
             <div class="target-form">
                 <form id="frmDatos">
                     <span>Form register</span>
+                    <p hidden>
+                        <input type="text" name="id" id="id">
+                    </p>
                     <p>
                         <label for="">Name</label>
                         <input type="text" name="txtName" id="txtName" placeholder="Ej: Carlos">
@@ -34,7 +37,7 @@
                     </p>
                     <p>
                         <button type="button" id="btnCreate">Create</button>
-                        <button type="button" id="btnEdit" >Edit</button>
+                        <button type="button" id="btnUpdate" >Edit</button>
                         <button type="button" id="btnDelete" >Delete</button>
                         <button type="reset" id="btnCancel" >Cancel</button>
                     </p>
@@ -49,6 +52,7 @@
                         <th>Name</th>
                         <th>Number</th>
                         <th>Email</th>
+                        <th colspan="2">options</th>
                     </tr>
                     <tbody id="people">
                     </tbody>

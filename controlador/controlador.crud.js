@@ -1,25 +1,22 @@
 //FUNCIONALIDAD PARA MOSTRAR LOS REGISTROS
 const open = document.addEventListener('DOMContentLoaded', ()=>{
-    
+    //Mostrar personas registradas
+    read();
+    //Configuracion de botones inicial
     var btnCreate =document.getElementById('btnCreate');
-    var btnEdit =document.getElementById('btnEdit');
+    var btnEdit =document.getElementById('btnUpdate');
     var btnDelete =document.getElementById('btnDelete');
     var btnCancel =document.getElementById('btnCancel');
-
     btnCreate.hidden=false;
     btnEdit.hidden=true;
     btnDelete.hidden=true;
     btnCancel.hidden=false;
-    
-    //Mostrar personas registradas
-    read();
-    
 });
-
 function read(){
-    fetch('controlador/controlador.read.php')
-    .then((resp)=>resp.json())
-    .then((data)=>{
+
+fetch('controlador/controlador.read.php')
+.then((resp)=>resp.json())
+.then((data)=>{
         
         if (data!==null) {
             let tabla ='';
@@ -44,7 +41,6 @@ function read(){
     .catch((err)=>{console.log(err)})
 }
 //FUNCIONALIDAD PARA EDITAR REGISTRO
-
 //Funcion que imita el evento onclick
 const edit = (elemento, evento, selector, handler) => {
     elemento.addEventListener(evento, e => {
@@ -53,13 +49,10 @@ const edit = (elemento, evento, selector, handler) => {
         }
     });
 };
-
-
-
 edit(document, 'click', '.btnEdit', e=>{
     //Ocultar y mostrar botones para el procedimiento de edicion
     var btnCreate =document.getElementById('btnCreate');
-    var btnEdit =document.getElementById('btnEdit');
+    var btnEdit =document.getElementById('btnUpdate');
     var btnDelete =document.getElementById('btnDelete');
     var btnCancel =document.getElementById('btnCancel');
     btnCreate.hidden=true;
@@ -68,47 +61,42 @@ edit(document, 'click', '.btnEdit', e=>{
     btnCancel.hidden=false;
 
     //Recuperamos los datos del registro a modificar
-
-    var fila = e.target.parentNode.parentNode;
+    let fila = e.target.parentNode.parentNode;
     var dataUp =
     {
         id: fila.firstElementChild.innerHTML,
         name: fila.children[1].innerHTML,
-        email: fila.children[2].innerHTML
+        phone: fila.children[2].innerHTML,
+        email: fila.children[3].innerHTML
     };
 
     //Cargamos el formulario con los datos listos para ser modificados
-    document.getElementById('numID').value=dataUp.id;
+    document.getElementById('id').value =dataUp.id;
     document.getElementById('txtName').value =dataUp.name;
+    document.getElementById('txtPhone').value=dataUp.phone;
     document.getElementById('txtEmail').value =dataUp.email;
 
 });
-
-var save = document.getElementById('btnEdit');
+var save = document.getElementById('btnUpdate');
 save.addEventListener('click', update);
-
 function update() {
-    alert("vamos a actualizar un registro");
     var formulario = document.getElementById('frmDatos');
     var datos = new FormData(formulario);
-    console.log(datos);
     fetch('controlador/controlador.update.php',
     {
         method: "POST",
         body: datos
     })
-    .then(res => res.json())
-    .then(data => {console.log(data);})
+    .then(res => res.text())
+    .then(data => {read();})
     .catch(error => console.log(error))
 }
 
 
 //FUNCIONALIDAD PARA INSERTAR
-
 var create = document.getElementById('btnCreate');
 create.addEventListener('click', insert);
 
-//Arreglar
 function insert() {
     var formulario = document.getElementById('frmDatos');
     var datos = new FormData(formulario);
@@ -119,11 +107,9 @@ function insert() {
     })
     .then(response => response.text())
     .then(data => read());
-
 }
 
 //FUNCIONALIDAD PARA ELIMINAR REGISTRO (CAMBIAR EL ESTADO DE TRUE A FALSE)
-
 //Funcion que imita el evento onclick
 const delete_id = (elemento, evento, selector, handler) => {
     elemento.addEventListener(evento, e => {
@@ -135,32 +121,35 @@ const delete_id = (elemento, evento, selector, handler) => {
 
 delete_id(document,'click', '.btnDelete', e=>
 {
+    //Configuracion de botones para eliminar
     var btnCreate =document.getElementById('btnCreate');
-    var btnEdit =document.getElementById('btnEdit');
+    var btnEdit =document.getElementById('btnUpdate');
     var btnDelete =document.getElementById('btnDelete');
     var btnCancel =document.getElementById('btnCancel');
     btnCreate.hidden=true;
     btnEdit.hidden=true;
     btnDelete.hidden=false;
     btnCancel.hidden=false;
-    //Recuperamos los datos del registro a modificar
-
+    //Recuperamos los datos del registro a eliminar
     var fila = e.target.parentNode.parentNode;
     var dataUp =
     {
         id: fila.firstElementChild.innerHTML,
         name: fila.children[1].innerHTML,
-        email: fila.children[2].innerHTML
+        phone: fila.children[2].innerHTML,
+        email: fila.children[3].innerHTML
     };
 
-    //Cargamos el formulario con los datos listos para ser modificados
-    document.getElementById('numID').value=dataUp.id;
+    //Cargamos el formulario con los datos listos para ser eliminados
+    document.getElementById('id').value =dataUp.id;
     document.getElementById('txtName').value =dataUp.name;
+    document.getElementById('txtPhone').value=dataUp.phone;
     document.getElementById('txtEmail').value =dataUp.email;
 })
 
 const eliminar = document.getElementById('btnDelete');
-eliminar.addEventListener('click', eliminate)
+eliminar.addEventListener('click', eliminate);
+
 function eliminate() {
     var formulario = document.getElementById('frmDatos');
     var datos = new FormData(formulario);
@@ -170,8 +159,8 @@ function eliminate() {
         method: 'POST',
         body: datos
     })
-    .then(res => res.json())
-    .then(data=>{console.log(data);})
+    .then(res => res.text())
+    .then(data=>{read();})
     .catch(error=>{console.log(error);})
 }
 
@@ -182,11 +171,11 @@ cancel.addEventListener('click', cancelar);
 
 function cancelar() {
     var btnCreate =document.getElementById('btnCreate');
-    var btnEdit =document.getElementById('btnEdit');
+    var btnEdit =document.getElementById('btnUpdate');
     var btnDelete =document.getElementById('btnDelete');
     var btnCancel =document.getElementById('btnCancel');
-    btnCreate.hidden=false;
-    btnEdit.hidden=true;
-    btnDelete.hidden=true;
+    btnCreate.hidden=true;
+    btnEdit.hidden=false;
+    btnDelete.hidden=false;
     btnCancel.hidden=false;
 } 
