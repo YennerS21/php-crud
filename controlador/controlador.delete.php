@@ -12,7 +12,7 @@
         var_dump($fails);
         die();
     }else{
-        include '../crud.php';
+        include_once '../modelo/crud.php';
         $obj_crud = new Crud();
         $obj_crud->delete($id);
     } 

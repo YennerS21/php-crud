@@ -25,7 +25,7 @@ if (count($fails)!==0) {
     die();
 }else{
     echo $id;
-    include '../crud.php';
+    include_once '../modelo/crud.php';
     $obj_crud = new Crud();
     $res = $obj_crud->update($id,$name, $phone, $email);
 }

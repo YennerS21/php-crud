@@ -13,7 +13,6 @@ const open = document.addEventListener('DOMContentLoaded', ()=>{
     btnCancel.hidden=false;
 });
 function read(){
-
 fetch('controlador/controlador.read.php')
 .then((resp)=>resp.json())
 .then((data)=>{
@@ -34,9 +33,6 @@ fetch('controlador/controlador.read.php')
         }else{
             console.log("mal");
         }
-    })
-    .catch(function(error) {
-        console.log(error);
     })
     .catch((err)=>{console.log(err)})
 }
